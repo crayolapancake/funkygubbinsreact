@@ -6,7 +6,7 @@ import './App.css';
 //
 // url: "https://openapi.etsy.com/v2/shops/" + shop_name + "/listings/active.js?api_key=" + api_key + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
 
-// url: "https://openapi.etsy.com/v2/shops/funkygubbins/listings/active.js?api_key=0pr9kg4e7tu8vqpr3uzbx3jm"
+
 
 // &includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
 
@@ -21,7 +21,7 @@ class App extends Component {
 
     // fix env, why's it not finding this
     // this.api_key = {REACT_APP_API_KEY};
-    this.api_key = '0pr9kg4e7tu8vqpr3uzbx3jm';
+    this.api_key = '';
     this.shop_name = "funkygubbins";
   }
 
