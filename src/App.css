@@ -1,38 +1,85 @@
-.App {
+.app {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border: 2px solid lime;
+  min-height: 100vh;
+  min-width: 100vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.header-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: 20vh;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  align-items: center;
+  justify-self: center;
+  background-position: center;
+  background-size: cover;
+}
+
+.title {
+  /* color: #04c0c0; */
+  display: flex;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: calc(10px + 4vmin);
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  justify-content: center;
+  padding-top: 1%;
+  /* align-content: center; */
+  /* align-self: center; */
+}
+
+.header-link {
+  border: 2px solid blue;
+}
+
+.buttonContainer {
+  flex-direction: row;
+}
+
+.product-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  border: 2px solid orange;
+  height: 40vh;
+  width: 80%;
+  margin-top: 5vh;
+  align-items: center;
+  align-self: center;
+  justify-self: center;
+}
+
+.single-product-container {
+  border: 2px solid hotpink;
+  width: 30%;
+  height: 30vh;
+  margin: 5%;
+}
+
+.product-title {
+  color: #00c7c7;
+  font-size: calc(10px + 1vmin);
+  border: 2px solid yellow;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #ececec;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #00c7c7;
-}
-
-.Shop-view {
-  border: 2 solid black;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footer {
 }
