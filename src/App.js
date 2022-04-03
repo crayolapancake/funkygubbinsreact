@@ -3,10 +3,7 @@ import Header from './Common/Header';
 import SingleProduct from './Common/SingleProduct';
 import './App.css';
 
-//
 // url: "https://openapi.etsy.com/v2/shops/" + shop_name + "/listings/active.js?api_key=" + api_key + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
-
-
 
 // &includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
 
@@ -17,59 +14,37 @@ class App extends Component {
 
     this.state = {
       isLoaded: null,
-    }
-
-    // fix env, why's it not finding this
-    // this.api_key = {REACT_APP_API_KEY};
-    this.api_key = '';
-    this.shop_name = "funkygubbins";
+      loading: false,
+      results: []
+    };
   }
 
+
   componentDidMount() {
-    // console.log('api key: ', `${process.env.REACT_APP_API_KEY}`)
-    console.log('api key: ', this.api_key)
+    if (!window.results) {
+      // console.log('NO window.results');
+      setTimeout(() => {
+        this.setState({ loading: !this.state.loading });
+      }, 1000);
+    } else {
+      this.setState({ isLoaded: true, results: window.results });
+    }
+  }
 
+  componentDidUpdate() {
+    const { loading } = this.state;
 
-    const url = "https://openapi.etsy.com/v2/shops/" + this.shop_name + "/listings/active.js?api_key=" + this.api_key
-
-    fetch("https://openapi.etsy.com/v2/shops/" + this.shop_name + "/listings/active?api_key=" + this.api_key, {
-
-    // fetch("https://openapi.etsy.com/v2/listings/active?api_key={" + this.api_key + "}", {
-
-
-      crossDomain:true,
-      method: 'GET',
-      dataType:'JSONP',
-      headers:{
-        'Access-Control-Allow-Origin':'*'
-      },
-      // body: JSON.stringify({
-      //   // username: user,
-      //   // password: pass,
-      // })
-    })
-
-
-    .then(res => res.json())
-    .then(res => {
-      console.log("response:", res);
-    })
-    .then(
-      (result) => {
-        console.log("result!", result);
-        this.setState({
-          isLoaded: true,
-          // items: result.items
+    if (!window.results) {
+      setTimeout(() => {
+        this.setState({ loading: !loading }, () => {
         });
-      },
-      (error) => {
-        console.log("error", error);
-        this.setState({
-          isLoaded: true,
-          error
-        });
-      }
-    )
+      }, 1000);
+    } else if (JSON.stringify(this.state.results) !== JSON.stringify(window.results)) {
+      console.log("else");
+      this.setState({ isLoaded: true, results: window.results },
+        // () => {console.log("setting results: ", this.state.results)}
+      );
+    }
   }
 
   render() {
@@ -79,9 +54,12 @@ class App extends Component {
           <Header />
         </div>
         <div className="product-container">
-          <SingleProduct />
-          <SingleProduct />
-          <SingleProduct />
+          {this.state.results.map((item, i) => {
+            // console.log("item:", item);
+            const shortTitle = item.title.split(' ').slice(0, 4).join(' ');
+            return <SingleProduct title={shortTitle} key={i} imageUrl={item.MainImage.url_fullxfull} />;
+          })
+          }
         </div>
       </div>
     );
